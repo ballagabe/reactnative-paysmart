@@ -5,8 +5,9 @@ import {
   Text,
   Image
 } from 'react-native';
+import { Icon } from 'react-native-elements'
 
-const HeaderComponent: () => React$Node = () => {
+const HeaderComponent = () => {
   return (
     <>
       <View style={styles.header}>
@@ -26,6 +27,14 @@ const HeaderComponent: () => React$Node = () => {
       </View>
       <View style={styles.balanceNow}>
         <Text style={styles.balanceNowText}>Outcome: 32.44$</Text>
+      </View>
+      <View>
+        <Icon
+          name={'add'}
+          type='material'
+          color='#636363'
+          style={styles.addButton}
+        />
       </View>
     </>
 )};
@@ -81,11 +90,19 @@ const styles = StyleSheet.create({
   },
   balanceNowText: {
     alignSelf: 'center',
-    marginTop: 30,
-    marginBottom: 30,
+    marginTop: 50,
+    marginBottom: 10,
     color: '#fff',
     fontSize: 25,
     fontWeight: 'bold'
+  },
+  addButton: {
+    marginBottom: 10,
+    backgroundColor: 'white',
+    borderRadius: 30,
+    width: 45,
+    padding: 10,
+    alignSelf: 'center'
   }
 });
 export default HeaderComponent;

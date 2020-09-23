@@ -84,12 +84,12 @@ const Item = ({ item }) => (
   </View>
 );
 
-const TransactionComponent: () => React$Node = () => {
+const TransactionComponent = () => {
   return (
     <>
       <ImageBackground style={{flex: 1}} 
         resizeMode='cover' 
-        source={require('../src/images/gardient_backgorund.png')}>    
+        source={require('../src/images/gardient_backgorund.png')}>
         <HeaderComponent />
         <View style={styles.transactions}>
           <FlatList
