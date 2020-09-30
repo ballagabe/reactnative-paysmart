@@ -44,7 +44,6 @@ const App: () => React$Node = () => {
               )
             }}
           />
-          
         </Tab.Navigator>
       </NavigationContainer>
     </>

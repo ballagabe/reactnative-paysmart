@@ -11,12 +11,10 @@ import { Picker } from '@react-native-community/picker'
 import { Input } from 'react-native-elements';
 import { Icon } from 'react-native-elements'
 
-const SettingsComponent= () =>  {
+const SettingsComponent = () =>  {
   const [isEnabled, setIsEnabled] = useState(true);
   const [selectedValue, setSelectedValue] = useState("HUF");
-
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-
   return (
     <>
       <ImageBackground style={{flex: 1}} 
@@ -49,7 +47,6 @@ const SettingsComponent= () =>  {
           >
             <Picker.Item color='#636363' label="HUF" value="huf" />
             <Picker.Item color='#636363' label="EUR" value="eur" />
-            <Picker.Item color='#636363' label="USD" value="usd" />
           </Picker>
           <View style={styles.inputView}>
             <Text style={styles.settingsText}>

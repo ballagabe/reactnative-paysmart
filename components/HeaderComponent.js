@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   View,
   Text,
-  Image
+  Image,
+  TouchableHighlight,
+  Modal, 
+  Pressable
 } from 'react-native';
+import { Picker } from '@react-native-community/picker'
+import { Input } from 'react-native-elements';
 import { Icon } from 'react-native-elements'
 
 const HeaderComponent = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [selectedValue, setSelectedValue] = useState("Food");
   return (
     <>
       <View style={styles.header}>
@@ -29,13 +36,73 @@ const HeaderComponent = () => {
         <Text style={styles.balanceNowText}>Outcome: 32.44$</Text>
       </View>
       <View>
-        <Icon
-          name={'add'}
-          type='material'
-          color='#636363'
-          style={styles.addButton}
-        />
+        <Pressable onPress={() => setModalVisible(true)}>
+          <Icon
+            name={'add'}
+            type='material'
+            color='#636363'
+            style={styles.addButton}
+          />
+        </Pressable>
       </View>
+
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Add new expense</Text>
+            <View style={styles.addForm}>
+              <Text style={styles.formText}>Type</Text>
+              <Picker
+                selectedValue={selectedValue}
+                style={styles.typePicker}
+                onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+              >
+                <Picker.Item color='#636363' label="Food" value="food" />
+                <Picker.Item color='#636363' label="Dress" value="dress" />
+                <Picker.Item color='#636363' label="Travel" value="travel" />
+                <Picker.Item color='#636363' label="Other" value="other" />
+              </Picker>
+              <Text style={styles.formText}>Title</Text>
+              <View style={styles.inputView}>
+                <Input
+                  style={styles.inputStyle}
+                  placeholder='Expense title'
+                />
+              </View>
+              <Text style={styles.formText}>Price</Text>
+              <View style={styles.inputView}>
+                <Input
+                  keyboardType='number-pad'
+                  style={styles.inputStyle}
+                  placeholder='Expense price'
+                />
+              </View>
+            </View>
+            <View style={styles.modalButtons}>
+              <TouchableHighlight
+                style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                }}
+              >
+                <Text style={styles.textStyle}>Add</Text>
+              </TouchableHighlight>
+              <TouchableHighlight
+                style={{ ...styles.openButton, backgroundColor: "#de0b51" }}
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                }}
+              >
+                <Text style={styles.textStyle}>Cancel</Text>
+              </TouchableHighlight>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </>
 )};
 
@@ -103,6 +170,66 @@ const styles = StyleSheet.create({
     width: 45,
     padding: 10,
     alignSelf: 'center'
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22
+  },
+  modalView: {
+    margin: 20,
+    width: 300,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5
+  },
+  openButton: {
+    backgroundColor: "#F194FF",
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+    margin: 5
+  },
+  modalButtons: {
+    flexDirection: 'row'
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    paddingLeft: 5,
+    paddingRight: 5,
+    textAlign: "center"
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
+    fontSize: 20,
+    fontWeight: 'bold'
+  },
+  addForm: {
+    paddingBottom: 10
+  },
+  formText: {
+    fontSize: 17
+  },
+  typePicker: {
+    width: 120
+  },
+  inputView: {
+    width: 150
+  },
+  inputStyle: {
+    fontSize: 14
   }
 });
 export default HeaderComponent;
