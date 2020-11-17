@@ -5,16 +5,18 @@ import {
   Text,
   Image,
   ImageBackground,
-  Switch
+  Switch,
+  TextInput
 } from 'react-native';
-import { Picker } from '@react-native-community/picker'
-import { Input } from 'react-native-elements';
 import { Icon } from 'react-native-elements'
 
 const SettingsComponent = () =>  {
   const [isEnabled, setIsEnabled] = useState(true);
-  const [selectedValue, setSelectedValue] = useState("HUF");
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  const [name, setName] = useState("Gabor Balla");
+  const toggleSwitch = () =>  {
+    setIsEnabled(previousState => !previousState)
+    !isEnabled ? setName('') : null
+  };
   return (
     <>
       <ImageBackground style={{flex: 1}} 
@@ -33,43 +35,23 @@ const SettingsComponent = () =>  {
                 color='#fff'
               />
             </View>
-            <Text style={styles.headerText}>Gabor Balla</Text>
+            <Text style={styles.headerText}>{name}</Text>
           </View>
         </View>
         <View style={styles.settingsInputs}>
-          <Text style={styles.settingsText}>
-            Select a currency
-          </Text>
-          <Picker
-            selectedValue={selectedValue}
-            style={styles.currencyPicker}
-            onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-          >
-            <Picker.Item color='#636363' label="HUF" value="huf" />
-            <Picker.Item color='#636363' label="EUR" value="eur" />
-          </Picker>
-          <View style={styles.inputView}>
-            <Text style={styles.settingsText}>
-              Monthiversary
-            </Text>
-            <Input
-              keyboardType='number-pad'
-              style={styles.inputStyle}
-              placeholder='Your monthiversary'
-            />
-          </View>
           <View style={styles.inputView}>
             <Text style={styles.settingsText}>
               Change name
             </Text>
-            <Input
+            <TextInput
               style={styles.inputStyle}
               placeholder='Your name'
+              onChangeText={(name, inputIndex) => setName(name)}
             />
           </View>
           <View style={styles.switch}>
             <Text style={styles.settingsText}>
-              Enable notifications
+              Enable anonymus mode
             </Text>
             <Switch
               trackColor={{ false: "#767577", true: "#9b85ab" }}
